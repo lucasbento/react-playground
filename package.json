@@ -1,0 +1,19 @@
+{
+  "name": "react-playground",
+  "version": "1.0.0",
+  "description": "React Playground",
+  "main": "webapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasbento/react-playground.git"
+  },
+  "author": "Lucas Bento da Silva <lucas.bsilva@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucasbento/react-playground/issues"
+  },
+  "homepage": "https://github.com/lucasbento/react-playground#readme"
+}
