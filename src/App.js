@@ -45,27 +45,41 @@ var BugRow = React.createClass({
 			</tr>
 		);
 	}
-})
+});
 
 var BugAdd = React.createClass({
+	handleFormSubmit: function(e) {
+		e.preventDefault();
+
+		this.props.addBug({
+			owner: e.target.owner.value,
+			title: e.target.owner.title,
+			status: 'New',
+			priority: 'P1'
+		});
+	},
 	render: function() {
 		return (
 			<div className="bugAdd">
-				<span>This is where the add button will be</span>
+				<form onSubmit={this.handleFormSubmit}>
+					<input type="text" name="owner" placeholder="Owner" />
+					<input type="text" name="title" placeholder="Title" />
+					<input type="submit" value="Add Bug" />
+				</form>
 			</div>
 		);
 	}
 });
 
 var BugList = React.createClass({
-	addBug: function() {
+	addBug: function(bug) {
 		var newState = this.state.bugs;
 		newState.push({
-				id: 3,
-				status: 'Waiting',
-				priority: 'P1',
-				owner: 'Joey',
-				title: 'Va fa napoli.'
+			id: this.state.bugs.length + 1,
+			status: bug.status,
+			priority: bug.priority,
+			owner: bug.owner,
+			title: bug.title
 		});
 		this.setState(newState);
 	},
@@ -91,9 +105,8 @@ var BugList = React.createClass({
 		return (
 			<div className="bugList">
 				<BugFilter />
-				<BugAdd />
+				<BugAdd addBug={this.addBug} />
 				<BugTable bugs={this.state.bugs} />
-				<button onClick={this.addBug}>Add Bug</button>
 			</div>
 		);
 	}
