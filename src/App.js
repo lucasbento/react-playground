@@ -58,6 +58,17 @@ var BugAdd = React.createClass({
 });
 
 var BugList = React.createClass({
+	addBug: function() {
+		var newState = this.state.bugs;
+		newState.push({
+				id: 3,
+				status: 'Waiting',
+				priority: 'P1',
+				owner: 'Joey',
+				title: 'Va fa napoli.'
+		});
+		this.setState(newState);
+	},
 	getInitialState: function() {
 		return {bugs: [
 			{
@@ -82,6 +93,7 @@ var BugList = React.createClass({
 				<BugFilter />
 				<BugAdd />
 				<BugTable bugs={this.state.bugs} />
+				<button onClick={this.addBug}>Add Bug</button>
 			</div>
 		);
 	}
