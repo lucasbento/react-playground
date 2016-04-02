@@ -1,20 +1,3 @@
-var bugs = [
-	{
-		id: 1,
-		status: 'Open',
-		priority: 'P1',
-		owner: 'Joey',
-		title: 'Joey Tribbiani does not share food.'
-	},
-	{
-		id: 2,
-		status: 'Closed',
-		priority: 'P3',
-		owner: 'Chandler',
-		title: 'Ms. Chanandler Bong.'
-	}
-];
-
 var BugFilter = React.createClass({
 	render: function() {
 		return (
@@ -34,16 +17,16 @@ var BugTable = React.createClass({
 		return (
 			<table border="1">
 				<thead>
-					<th>ID</th>
-					<th>Status</th>
-					<th>Priority</th>
-					<th>Owner</th>
-					<th>Title</th>
+					<tr>
+						<th>ID</th>
+						<th>Status</th>
+						<th>Priority</th>
+						<th>Owner</th>
+						<th>Title</th>
+					</tr>
 				</thead>
 				<tbody>
-					<div className="bugRows">
-						{bugRows}
-					</div>
+					{bugRows}
 				</tbody>
 			</table>
 		);
@@ -75,12 +58,30 @@ var BugAdd = React.createClass({
 });
 
 var BugList = React.createClass({
+	getInitialState: function() {
+		return {bugs: [
+			{
+				id: 1,
+				status: 'Open',
+				priority: 'P1',
+				owner: 'Joey',
+				title: 'Joey Tribbiani does not share food.'
+			},
+			{
+				id: 2,
+				status: 'Closed',
+				priority: 'P3',
+				owner: 'Chandler',
+				title: 'Ms. Chanandler Bong.'
+			}
+		]}
+	},
 	render: function() {
 		return (
 			<div className="bugList">
 				<BugFilter />
 				<BugAdd />
-				<BugTable bugs={bugs} />
+				<BugTable bugs={this.state.bugs} />
 			</div>
 		);
 	}
