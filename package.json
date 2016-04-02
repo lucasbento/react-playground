@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/lucasbento/react-playground/issues"
   },
-  "homepage": "https://github.com/lucasbento/react-playground#readme"
+  "homepage": "https://github.com/lucasbento/react-playground#readme",
+  "devDependencies": {
+    "babel-preset-react": "^6.5.0"
+  },
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
