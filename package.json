@@ -4,7 +4,7 @@
   "description": "React Playground",
   "main": "webapp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "babel": "babel --presets react --watch src/ --out-dir static/"
   },
   "repository": {
     "type": "git",
