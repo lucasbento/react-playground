@@ -53,7 +53,7 @@ var BugAdd = React.createClass({
 
 		this.props.addBug({
 			owner: e.target.owner.value,
-			title: e.target.owner.title,
+			title: e.target.title.value,
 			status: 'New',
 			priority: 'P1'
 		});
@@ -73,33 +73,36 @@ var BugAdd = React.createClass({
 
 var BugList = React.createClass({
 	addBug: function(bug) {
-		var newState = this.state.bugs;
-		newState.push({
-			id: this.state.bugs.length + 1,
-			status: bug.status,
-			priority: bug.priority,
-			owner: bug.owner,
-			title: bug.title
+		var bugs = this.state.bugs;
+
+		$.ajax({
+			url: '/api/bugs',
+			contentType: 'application/json',
+			type: 'POST',
+			data: JSON.stringify({bug: bug}),
+			success: function(response) {
+				bugs.push(response);
+
+				this.setState({
+					bugs: bugs
+				});
+			}.bind(this)
 		});
-		this.setState(newState);
+	},
+	componentDidMount: function() {
+		this.requestBugs = $.get('/api/bugs', function(response) {
+			this.setState({
+				bugs: response
+			});
+		}.bind(this));
+	},
+	componentWillUnmount: function() {
+		this.requestBugs.abort();
 	},
 	getInitialState: function() {
-		return {bugs: [
-			{
-				id: 1,
-				status: 'Open',
-				priority: 'P1',
-				owner: 'Joey',
-				title: 'Joey Tribbiani does not share food.'
-			},
-			{
-				id: 2,
-				status: 'Closed',
-				priority: 'P3',
-				owner: 'Chandler',
-				title: 'Ms. Chanandler Bong.'
-			}
-		]}
+		return {
+			bugs: []
+		};
 	},
 	render: function() {
 		return (

@@ -19,7 +19,7 @@ var bugs = [
 	}
 ];
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // Default contentType is "application/json"
 
 app.get('/api/bugs', function(req, res) {
 	return res.json(bugs);
@@ -27,6 +27,7 @@ app.get('/api/bugs', function(req, res) {
 
 app.post('/api/bugs', function(req, res) {
 	var newBug = req.body.bug;
+	console.log(newBug);
 	newBug.id = bugs.length + 1;
 	bugs.push(newBug);
 
